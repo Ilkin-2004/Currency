@@ -34,6 +34,21 @@ function right_buttons() {
     })
     return valyuta;
 }
+function chanceFromRight(left_button, right_button, input_right) {
+    fetch(`https://v6.exchangerate-api.com/v6/95640758702a8dbcee79e935/pair/${left_button}/${right_button}/${input_right.value}`)
+        .then(responce => responce.json())
+        .then((data) => {
+            input_left.value = data.conversion_rate * input_right.value
+        }).catch(error => console.log(error))
+}
+function chanceFromLeft(left_button, right_button, input_left) {
+    fetch(`https://v6.exchangerate-api.com/v6/95640758702a8dbcee79e935/pair/${left_button}/${right_button}/${input_left.value}`)
+        .then(responce => responce.json())
+        .then((data) => {
+            input_right.value = data.conversion_rate * input_left.value
+        }).catch(error => console.log(error))
+}
+
 input_right.addEventListener("click", (even) => {
     let input_right = document.querySelector('.input_right')
     let input_left = document.querySelector('.input_left')
@@ -42,21 +57,12 @@ input_right.addEventListener("click", (even) => {
     if (right_button === "") {
         console.log("saq  bosdu")
         right_button = "RUB"
-        fetch(`https://v6.exchangerate-api.com/v6/95640758702a8dbcee79e935/pair/${left_button}/${right_button}/${even.target.value}`)
-            .then(responce => responce.json())
-            .then((data) => {
-                input_left.value = data.conversion_rate * input_right.value
-            }).catch(error => console.log(error))
+        chanceFromRight(left_button, right_button, input_right)
     }
     else {
-        fetch(`https://v6.exchangerate-api.com/v6/95640758702a8dbcee79e935/pair/${left_button}/${right_button}/${even.target.value}`)
-            .then(responce => responce.json())
-            .then((data) => {
-                input_left.value = data.conversion_rate * input_right.value
-            }).catch(error => console.log(error))
+        chanceFromRight(left_button, right_button, input_right)
     }
 })
-
 input_left.addEventListener("click", (even) => {
     let input_right = document.querySelector('.input_right')
     let input_left = document.querySelector('.input_left')
@@ -65,105 +71,61 @@ input_left.addEventListener("click", (even) => {
     if (right_button === "") {
         console.log("saq  bosdu")
         right_button = "RUB"
-        fetch(`https://v6.exchangerate-api.com/v6/95640758702a8dbcee79e935/pair/${left_button}/${right_button}/${even.target.value}`)
-            .then(responce => responce.json())
-            .then((data) => {
-                input_right.value = data.conversion_rate * input_left.value
-            }).catch(error => console.log(error))
+        chanceFromLeft(left_button, right_button, input_left)
     }
     else {
-        fetch(`https://v6.exchangerate-api.com/v6/95640758702a8dbcee79e935/pair/${left_button}/${right_button}/${even.target.value}`)
-            .then(responce => responce.json())
-            .then((data) => {
-                input_right.value = data.conversion_rate * input_left.value
-            }).catch(error => console.log(error))
+        chanceFromLeft(left_button, right_button, input_left)
     }
 })
-
 function change(left_button, right_button) {
     let input_right = document.querySelector('.input_right')
     let input_left = document.querySelector('.input_left')
     if (input_left.value === "") {
         input_left.value = 5000;
-        if (right_button === "" ) {
+        if (right_button === "") {
             right_button = "RUB"
-            fetch(`https://v6.exchangerate-api.com/v6/95640758702a8dbcee79e935/pair/${left_button}/${right_button}/${input_left.value}`)
-                .then(responce => responce.json())
-                .then((data) => {
-                    input_right.value = data.conversion_rate * input_left.value
-                }).catch(error => console.log(error))
-
+            chanceFromLeft(left_button, right_button, input_left)
         } else {
             console.log(left_button, right_button)
-            fetch(`https://v6.exchangerate-api.com/v6/95640758702a8dbcee79e935/pair/${left_button}/${right_button}/${input_left.value}`)
-                .then(responce => responce.json())
-                .then((data) => {
-                    input_right.value = data.conversion_rate * input_left.value
-                }).catch(error => console.log(error))
+            chanceFromLeft(left_button, right_button, input_left)
         }
-
     }
     else {
-        if (right_button === "" || left_button === "") {
-            console.log("saq yada sol bosdu")
+        if (right_button === "") {
+            console.log("saq bosdu")
             right_button = "RUB"
-            left_button = "RUB"
             console.log(left_button, right_button)
-            fetch(`https://v6.exchangerate-api.com/v6/95640758702a8dbcee79e935/pair/${left_button}/${right_button}/${input_left.value}`)
-                .then(responce => responce.json())
-                .then((data) => {
-                    input_right.value = data.conversion_rate * input_left.value
-                }).catch(error => console.log(error))
-
+            chanceFromLeft(left_button, right_button, input_left)
         } else {
-            fetch(`https://v6.exchangerate-api.com/v6/95640758702a8dbcee79e935/pair/${left_button}/${right_button}/${input_left.value}`)
-                .then(responce => responce.json())
-                .then((data) => {
-                    input_right.value = data.conversion_rate * input_left.value
-                }).catch(error => console.log(error))
+            chanceFromLeft(left_button, right_button, input_left)
         }
     }
 }
-function leftChangePurple(even){
+function leftChangePurple(even) {
     left_menu.forEach((element) => {
         element.style.background = "none"
     })
     even.target.style.background = "purple";
 }
-function rightChangePurple(even){
+function rightChangePurple(even) {
     right_menu.forEach((element) => {
         element.style.background = "none"
     })
     even.target.style.background = "purple";
 }
-
-first_Rub.addEventListener('click', (even) => {
-    leftChangePurple(even)
+left_menu.forEach((element) => {
+    element.addEventListener('click', (even) => {
+        leftChangePurple(even)
+    })
 })
-first_Usd.addEventListener('click', (even) => {
-    leftChangePurple(even)
-})
-first_Eur.addEventListener('click', (even) => {
-    leftChangePurple(even)
-})
-first_Gbp.addEventListener('click', (even) => {
-    leftChangePurple(even)
-})
-second_Rub.addEventListener('click', (even) => {
-    rightChangePurple(even)
-})
-second_Usd.addEventListener('click', (even) => {
-    rightChangePurple(even)
-})
-second_Eur.addEventListener('click', (even) => {
-    rightChangePurple(even)
-})
-second_Gbp.addEventListener('click', (even) => {
-    rightChangePurple(even)
+right_menu.forEach((element) => {
+    element.addEventListener('click', (even) => {
+        rightChangePurple(even)
+    })
 })
 left_menu.forEach((left_element) => {
     left_element.addEventListener('click', (even) => {
-        if (left_element.style.background === "purple" ) {
+        if (left_element.style.background === "purple") {
             let right_button = right_buttons()
             let left_button = left_buttons()
             change(left_button, right_button)
