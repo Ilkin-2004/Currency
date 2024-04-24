@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header{
+    display: flex;
+    flex-direction: flex;
+    width: 100%;
+    padding: 15px;
+    padding-left: 100px;
+    background-color: rgb(236, 235, 235);
+}
+.header-menu{
+    display: flex;
+    flex-direction: flex;
+    justify-content: space-between;
+    width: 70%;
+    
+}
+.header img{
+    width: auto;
+}
+.header-menu a{
+color:gray;
+font-weight: 300;
+font-size:large;
+margin-top: 3px;
+}
+.voyti{
+width: 30%;
+text-align: center;
+}
+.voyti button{
+    width: 58px;
+    height: 33px;
+    background-color: white;
+    border-radius: 5px;
+}
+.h1{
+    margin-top: 56px;
+    font-size: 36px;
+    font-weight: 700px;
+    margin-left: 390px;
+    margin-bottom: 33px;
+}
+.valyuta{
+    width: 100%;
+    height: 180px;
+    display: flex;
+}
+.first{
+    width: 259px;
+    height: 100%;
+    margin-left: 390px;
+    margin-right: 123px;
+}
+.second{
+    width: 259px;
+    height: 100%;
+}
+.first p,.second p{
+    display: flex;
+    height: 28px;
+    font-size: 12px;
+    align-items:center;
+}
+.valyuta-menu-left , .valyuta-menu-right{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.valyuta-menu-left button , .valyuta-menu-right button {
+    display: flex;
+    width: 25%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(218, 207, 207); 
+    background-color: red;
+    
+}
+.pullar{
+    width: 100%;
+    height: 102px;
+    border: 1px solid gray;
+    padding: 10px;
+}
+.input_left ,.input_right{
+    width: 100%;
+    height: 38px;
+    font-size: 36px;
+    border: none;
+}
+.pullar p{
+    font-size: 22px;
+    color:#C6C6C6;
+    margin-top:15px ;
+}
+.valyuta .first-button{
+    background-color: purple;
+}
