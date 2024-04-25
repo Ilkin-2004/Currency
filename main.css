@@ -101,3 +101,8 @@ text-align: center;
 .valyuta .first-button{
     background-color: purple;
 }
+.input_left ::-webkit-inner-spin-button{
+-webkit-appearance: none;
+margin: 0;
+outline: none;
+}

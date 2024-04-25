@@ -14,7 +14,10 @@ let second_Gbp = valyuta_right.querySelector(':nth-child(4)')
 let right_menu = valyuta_right.querySelectorAll('button')
 let input_right = document.querySelector('.input_right')
 let input_left = document.querySelector('.input_left')
-
+if (input_left.value === "") {
+    input_left.value = 1;
+    chanceFromLeft(first_Rub.innerHTML, second_Rub.innerHTML, input_left)
+}
 function left_buttons() {
     let valyuta = ""
     left_menu.forEach((element) => {
@@ -48,14 +51,12 @@ function chanceFromLeft(left_button, right_button, input_left) {
             input_right.value = data.conversion_rate * input_left.value
         }).catch(error => console.log(error))
 }
-
-input_right.addEventListener("click", (even) => {
+input_right.addEventListener("input", (even) => {
     let input_right = document.querySelector('.input_right')
     let input_left = document.querySelector('.input_left')
     let right_button = right_buttons();
     let left_button = left_buttons()
     if (right_button === "") {
-        console.log("saq  bosdu")
         right_button = "RUB"
         chanceFromRight(left_button, right_button, input_right)
     }
@@ -63,13 +64,15 @@ input_right.addEventListener("click", (even) => {
         chanceFromRight(left_button, right_button, input_right)
     }
 })
-input_left.addEventListener("click", (even) => {
+input_left.addEventListener("input", (even) => {
     let input_right = document.querySelector('.input_right')
     let input_left = document.querySelector('.input_left')
     let right_button = right_buttons();
     let left_button = left_buttons()
+    if(left_button===""){
+        left_button="RUB"
+    }
     if (right_button === "") {
-        console.log("saq  bosdu")
         right_button = "RUB"
         chanceFromLeft(left_button, right_button, input_left)
     }
@@ -80,27 +83,18 @@ input_left.addEventListener("click", (even) => {
 function change(left_button, right_button) {
     let input_right = document.querySelector('.input_right')
     let input_left = document.querySelector('.input_left')
-    if (input_left.value === "") {
-        input_left.value = 5000;
-        if (right_button === "") {
-            right_button = "RUB"
-            chanceFromLeft(left_button, right_button, input_left)
-        } else {
-            console.log(left_button, right_button)
-            chanceFromLeft(left_button, right_button, input_left)
-        }
+    if (left_button === "") {
+        left_button = "RUB"
     }
-    else {
-        if (right_button === "") {
-            console.log("saq bosdu")
-            right_button = "RUB"
-            console.log(left_button, right_button)
-            chanceFromLeft(left_button, right_button, input_left)
-        } else {
-            chanceFromLeft(left_button, right_button, input_left)
-        }
+    if (right_button === "") {
+        right_button = "RUB"
+        chanceFromLeft(left_button, right_button, input_left)
+    } else {
+        chanceFromLeft(left_button, right_button, input_left)
     }
+
 }
+
 function leftChangePurple(even) {
     left_menu.forEach((element) => {
         element.style.background = "none"
