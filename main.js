@@ -27,7 +27,6 @@ function left_buttons() {
     })
     return valyuta;
 }
-
 function right_buttons() {
     let valyuta = ""
     right_menu.forEach((element) => {
@@ -52,8 +51,6 @@ function chanceFromLeft(left_button, right_button, input_left) {
         }).catch(error => console.log(error))
 }
 input_right.addEventListener("input", (even) => {
-    let input_right = document.querySelector('.input_right')
-    let input_left = document.querySelector('.input_left')
     let right_button = right_buttons();
     let left_button = left_buttons()
     if (right_button === "") {
@@ -65,12 +62,10 @@ input_right.addEventListener("input", (even) => {
     }
 })
 input_left.addEventListener("input", (even) => {
-    let input_right = document.querySelector('.input_right')
-    let input_left = document.querySelector('.input_left')
     let right_button = right_buttons();
     let left_button = left_buttons()
-    if(left_button===""){
-        left_button="RUB"
+    if (left_button === "") {
+        left_button = "RUB"
     }
     if (right_button === "") {
         right_button = "RUB"
@@ -94,7 +89,6 @@ function change(left_button, right_button) {
     }
 
 }
-
 function leftChangePurple(even) {
     left_menu.forEach((element) => {
         element.style.background = "none"
@@ -107,19 +101,13 @@ function rightChangePurple(even) {
     })
     even.target.style.background = "purple";
 }
-left_menu.forEach((element) => {
-    element.addEventListener('click', (even) => {
-        leftChangePurple(even)
-    })
-})
-right_menu.forEach((element) => {
-    element.addEventListener('click', (even) => {
-        rightChangePurple(even)
-    })
-})
+
 left_menu.forEach((left_element) => {
     left_element.addEventListener('click', (even) => {
-        if (left_element.style.background === "purple") {
+        if (event.target.style.background === "purple") {
+            console.log("Slamam")
+        }
+        else {
             let right_button = right_buttons()
             let left_button = left_buttons()
             change(left_button, right_button)
@@ -128,10 +116,24 @@ left_menu.forEach((left_element) => {
 })
 right_menu.forEach((right_element) => {
     right_element.addEventListener('click', (event) => {
+        console.log(event.target.style.background)
         if (event.target.style.background === "purple") {
+            console.log("Slamam")
+        }
+        else {
             let right_button = right_buttons()
             let left_button = left_buttons()
             change(left_button, right_button)
         }
+    })
+})
+left_menu.forEach((element) => {
+    element.addEventListener('click', (even) => {
+        leftChangePurple(even)
+    })
+})
+right_menu.forEach((element) => {
+    element.addEventListener('click', (even) => {
+        rightChangePurple(even)
     })
 })
